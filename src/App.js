@@ -1,16 +1,13 @@
 import './app.scss'
-import { HashRouter, Route, Routes, Link } from 'react-router-dom'
-import Page1 from './pages/Page1/Page1'
-import Page2 from './pages/Page2/Page2'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
     <>
       <HashRouter>
         <Routes>
-          <Route exact path="/" element={<Link to="page1">app</Link>} />
-          <Route path="/page1" element={<Page1 />} />
-          <Route path="/page2:id" element={<Page2 />} />
+          <Route exact path="/" element={<HomePage />} />
         </Routes>
       </HashRouter>
     </>

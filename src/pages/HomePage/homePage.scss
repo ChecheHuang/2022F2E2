@@ -1,0 +1,124 @@
+$main: #1C8B6A;
+
+.homePage {
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    position: relative;
+
+    .leftDownBg {
+        position: absolute;
+        background: url("../images/leftDownBg.png");
+        width: 243px;
+        height: 62px;
+        left: 0;
+        bottom: 159px;
+    }
+
+    .leftDown1 {
+        position: absolute;
+        background: url("../images/leftDown1.png");
+        width: 150px;
+        height: 305px;
+        left: 0;
+        bottom: 0;
+    }
+
+    .rightUp {
+        position: absolute;
+        background: url("../images/rightUp.png");
+        width: 122px;
+        height: 255px;
+        right: 0;
+        top: 0;
+    }
+
+    nav {
+        width: 100%;
+        padding: 28px 200px 0px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            width: 88.79px;
+            height: 57.15px;
+            background-image: url('../images/logo.png');
+        }
+
+        button {
+            color: $main;
+            font-family: 'Noto Sans TC';
+            font-weight: 400;
+            font-size: 18px;
+            background: transparent;
+            border: 2px solid $main;
+            padding: 8px 30px;
+            border-radius: 16px;
+        }
+    }
+
+    .container {
+        width: 1036px;
+        height: 558px;
+        background: gray;
+        margin: 20px auto;
+        background: rgba(240, 240, 240, 0.58);
+        border-radius: 34px;
+        position: relative;
+
+        .rightDown {
+            position: absolute;
+            background: url("../images/rightDown.png");
+            width: 670px;
+            height: 108px;
+            right: 0;
+            bottom: -36px;
+        }
+
+        .right1 {
+            position: absolute;
+            background: url("../images/right1.png");
+            width: 189px;
+            height: 268px;
+            top: 276px;
+            left: 420px;
+        }
+
+        .right2 {
+            position: absolute;
+            background: url("../images/right2.png");
+            width: 130px;
+            height: 218px;
+            top: 340px;
+            left: 662px;
+        }
+
+        .right3 {
+            position: absolute;
+            background: url("../images/right3.png");
+            width: 100px;
+            height: 170px;
+            top: 388px;
+            left: 770px;
+        }
+
+        .right4 {
+            position: absolute;
+            background: url("../images/right4.png");
+            width: 142px;
+            height: 248px;
+            top: 291px;
+            left: 815px;
+        }
+
+        .right5 {
+            position: absolute;
+            background: url("../images/right5.png");
+            width: 145px;
+            height: 278px;
+            top: 134px;
+            left: 845px;
+        }
+    }
+}

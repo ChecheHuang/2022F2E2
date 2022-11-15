@@ -40,6 +40,8 @@ $main: #1C8B6A;
         align-items: center;
         justify-content: space-between;
 
+
+
         .logo {
             width: 88.79px;
             height: 57.15px;
@@ -59,66 +61,80 @@ $main: #1C8B6A;
     }
 
     .container {
-        width: 1036px;
-        height: 558px;
+        width: calc(100vw - 224px);
+        height: calc(100vh - 116.79px);
         background: gray;
-        margin: 20px auto;
+        margin: 20px auto 20px auto;
         background: rgba(240, 240, 240, 0.58);
         border-radius: 34px;
         position: relative;
 
-        .rightDown {
-            position: absolute;
-            background: url("../images/rightDown.png");
+        .imgContainer {
             width: 670px;
-            height: 108px;
+            height: 480px;
+            position: absolute;
+            bottom: 0;
             right: 0;
-            bottom: -36px;
+
+            div {
+                width: 100%;
+                height: 100%;
+                position: relative;
+
+                img {
+                    position: absolute;
+
+                    &.rightDown {
+                        bottom: 0;
+                        width: 100%;
+                    }
+
+                    &.right1 {
+                        bottom: 50px;
+                        // left: 54px;
+                        left: 0.8%;
+                        // width: 189px;
+                        width: 28.2%;
+                    }
+
+                    &.right2 {
+                        bottom: 36px;
+                        // left: 296px;
+                        left: 44.1%;
+                        // width: 130px;
+                        width: 19.4%;
+                    }
+
+                    &.right3 {
+                        bottom: 36px;
+                        // left: 404px;
+                        left: 60.2%;
+                        // width: 100px;
+                        width: 14.9%;
+                    }
+
+                    &.right4 {
+                        bottom: 55px;
+                        // left: 449px;
+                        left: 67%;
+                        // width: 142px;
+                        width: 21.1%;
+
+                    }
+
+                    &.right5 {
+                        bottom: 180px;
+                        // left: 480px;
+                        left: 71.6%;
+                        // width: 145px;
+                        width: 21.6%;
+
+                    }
+                }
+            }
+
+
         }
 
-        .right1 {
-            position: absolute;
-            background: url("../images/right1.png");
-            width: 189px;
-            height: 268px;
-            top: 276px;
-            left: 420px;
-        }
-
-        .right2 {
-            position: absolute;
-            background: url("../images/right2.png");
-            width: 130px;
-            height: 218px;
-            top: 340px;
-            left: 662px;
-        }
-
-        .right3 {
-            position: absolute;
-            background: url("../images/right3.png");
-            width: 100px;
-            height: 170px;
-            top: 388px;
-            left: 770px;
-        }
-
-        .right4 {
-            position: absolute;
-            background: url("../images/right4.png");
-            width: 142px;
-            height: 248px;
-            top: 291px;
-            left: 815px;
-        }
-
-        .right5 {
-            position: absolute;
-            background: url("../images/right5.png");
-            width: 145px;
-            height: 278px;
-            top: 134px;
-            left: 845px;
-        }
     }
 }

@@ -11,12 +11,25 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 function HomePage() {
   const [openModel, setOpenModel] = useState(false)
+  const [modelInfo, setModelInfo] = useState('')
   const [files, setFiles] = useState([])
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (acceptFiles) => {
+    accept: {
+      'image/*': [],
+    },
+    onDrop: (acceptedFiles) => {
+      if (acceptedFiles.length === 0) {
+        setModelInfo('檔案格式錯誤，請重新選擇')
+        setOpenModel(true)
+        return
+      }
+      if (acceptedFiles[0].size > 10485760) {
+        setModelInfo('檔案超過10MB，請重新選擇')
+        setOpenModel(true)
+        return
+      }
       setFiles(
-        acceptFiles.map((file) =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
@@ -24,26 +37,11 @@ function HomePage() {
       )
     },
   })
-
-  const handleUploadFile = (e) => {
-    if (!e.target.files[0]) return
-    var reader = new FileReader()
-    reader.onload = function () {
-      setFiles([reader.result])
-    }
-    reader?.readAsDataURL(e?.target?.files[0])
-    e.target.value = ''
-  }
   const images = files.map((file) => {
-    return (
-      <div key={file.name}>
-        <img src={file.preview} style={{ width: '200px' }} alt="" />
-      </div>
-    )
+    return <img key={file.name} src={file.preview} alt="" />
   })
   return (
     <div className="homePage">
-      <div>{images}</div>
       <div className="leftDownBg"></div>
       <div className="leftDown1"></div>
       <div className="rightUp"></div>
@@ -53,7 +51,7 @@ function HomePage() {
       </nav>
       {openModel && (
         <div className="alert">
-          <div className="text">檔案超過10MB，請重新選擇</div>
+          <div className="text">{modelInfo}</div>
           <button
             onClick={() => {
               setOpenModel(false)
@@ -75,7 +73,10 @@ function HomePage() {
           省時便利又環保。
         </div>
         <div {...getRootProps()} className="fileContainer">
-          <img src={dragFileIcon} alt="" />
+          <div className="filImgContainer">
+            {images.length === 0 ? <img src={dragFileIcon} alt="" /> : images}
+          </div>
+
           <label htmlFor="">選擇檔案</label>
           <input
             {...getInputProps()}
@@ -85,7 +86,7 @@ function HomePage() {
             style={{ display: 'none' }}
           />
           <div className="remind">或拖移檔案到此處</div>
-          <div className="remind2">(限10MB內的PDF或JPG檔)</div>
+          <div className="remind2">(限10MB內的PNG或JPG檔)</div>
         </div>
         <div className="imgContainer">
           <div>

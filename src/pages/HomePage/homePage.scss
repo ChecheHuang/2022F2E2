@@ -1,11 +1,21 @@
 $main: #1C8B6A;
 $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
+@import "../../mixin.scss";
 
 .homePage {
     width: 100vw;
     height: 100vh;
     background: white;
     position: relative;
+
+    .loadingContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+    }
 
     .leftDownBg {
         position: absolute;
@@ -14,6 +24,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         height: 62px;
         left: 0;
         bottom: 159px;
+
+        @include ipad {
+            display: none;
+        }
     }
 
     .leftDown1 {
@@ -23,6 +37,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         height: 305px;
         left: 0;
         bottom: 0;
+
+        @include ipad {
+            display: none;
+        }
     }
 
     .rightUp {
@@ -32,6 +50,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         height: 255px;
         right: 0;
         top: 0;
+
+        @include ipad {
+            display: none;
+        }
     }
 
     .alert {
@@ -73,12 +95,25 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         align-items: center;
         justify-content: space-between;
 
+        @include ipad {
+            padding: 26.05px 125px 21.38px 125px;
+            position: fixed;
+            z-index: 2;
+
+        }
+
 
 
         .logo {
             width: 88.79px;
             height: 57.15px;
             background-image: url('../images/logo.png');
+            background-size: cover;
+
+            @include ipad {
+                width: 130.76px;
+                height: 87.57px;
+            }
         }
 
         button {
@@ -90,12 +125,15 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             border: 2px solid $main;
             padding: 8px 30px;
             border-radius: 16px;
+
+            @include ipad {
+                border: none;
+                color: black;
+            }
         }
     }
 
     .container {
-        // width: calc(100vw - 224px);
-        // height: calc(100vh - 136.79px);
         width: 1036px;
         height: 558px;
         background: gray;
@@ -103,6 +141,12 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         background: rgba(240, 240, 240, 0.58);
         border-radius: 34px;
         position: relative;
+
+        @include ipad {
+            width: 100vw;
+            min-height: 100vh;
+            margin: 0;
+        }
 
         button {
             width: 225px;
@@ -112,6 +156,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             color: #FFFFFF;
             border: none;
             border-radius: 34px 0px;
+
+            @include ipad {
+                display: none;
+            }
         }
 
         .title {
@@ -123,6 +171,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             margin-top: 55px;
             margin-left: 44px;
             font-size: 50px;
+
+            @include ipad {
+                display: none;
+            }
         }
 
         .description {
@@ -134,6 +186,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             color: #424242;
             margin-left: 47px;
             margin-top: 6px;
+
+            @include ipad {
+                display: none;
+            }
         }
 
         .imgContainer {
@@ -143,6 +199,12 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             bottom: -20px;
             right: 0;
             pointer-events: none;
+
+            @include ipad {
+                bottom: 37px;
+                left: 50%;
+                transform: translate(-50%, 0%);
+            }
 
             div {
                 width: 100%;
@@ -163,6 +225,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         left: 0.8%;
                         // width: 189px;
                         width: 28.2%;
+
+                        @include ipad {
+                            width: 273px;
+                        }
                     }
 
                     &.right2 {
@@ -171,6 +237,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         left: 44.1%;
                         // width: 130px;
                         width: 19.4%;
+
+                        @include ipad {
+                            left: 38%;
+                            width: 186px;
+                        }
                     }
 
                     &.right3 {
@@ -179,6 +250,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         left: 60.2%;
                         // width: 100px;
                         width: 14.9%;
+
+                        @include ipad {
+                            width: 147px;
+                        }
                     }
 
                     &.right4 {
@@ -188,6 +263,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         // width: 142px;
                         width: 21.1%;
 
+                        @include ipad {
+                            width: 206px;
+                        }
+
                     }
 
                     &.right5 {
@@ -196,6 +275,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         left: 71.6%;
                         // width: 145px;
                         width: 21.6%;
+
+                        @include ipad {
+                            display: none;
+                        }
 
                     }
                 }
@@ -217,10 +300,28 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             position: absolute;
             bottom: 151px;
             right: 113px;
-            .filImgContainer{
+
+            @include ipad {
+                // display: none;
+                width: 547px;
+                height: 567px;
+                top: 135px;
+                left: 50%;
+                transform: translate(-50%, 0%);
+
+
+            }
+
+            .filImgContainer {
                 width: 126px;
                 height: 102px;
-                img{
+
+                @include ipad {
+                    width: 225px;
+                    height: 183px;
+                }
+
+                img {
                     width: 100%;
                     height: 100%;
                     object-fit: contain;

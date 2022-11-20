@@ -18,9 +18,11 @@ function HomePage() {
   const [files, setFiles] = useState([])
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': [],
+      'image/*,.pdf': [],
     },
     onDrop: (acceptedFiles) => {
+      console.log('acceptedFiles', acceptedFiles)
+
       if (acceptedFiles.length === 0) {
         setModelInfo('檔案格式錯誤，請重新選擇')
         setOpenModel(true)
@@ -40,9 +42,9 @@ function HomePage() {
       )
     },
   })
-  const images = files.map((file) => {
-    return <img key={file.name} src={file.preview} alt="" />
-  })
+  // const images = files.map((file) => {
+  //   return <img key={file.name} src={file.preview} alt="" />
+  // })
   const options = {
     animationData: loadingLottie,
     loop: true,
@@ -86,11 +88,7 @@ function HomePage() {
             </div>
             <div {...getRootProps()} className="fileContainer">
               <div className="filImgContainer">
-                {images.length === 0 ? (
-                  <img src={dragFileIcon} alt="" />
-                ) : (
-                  images
-                )}
+                <img src={dragFileIcon} alt="" />
               </div>
 
               <label htmlFor="">選擇檔案</label>

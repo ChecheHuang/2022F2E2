@@ -12,6 +12,7 @@ function Sample() {
   const handleFile = (e) => {
     let selectedFile = e.target.files[0]
     // console.log(selectedFile.type)
+    console.log(selectedFile)
     const reader = new FileReader()
     reader.readAsDataURL(selectedFile)
     reader.onloadend = (e) => {
@@ -25,7 +26,7 @@ function Sample() {
       {pdfFile && (
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
           <Viewer
-            plugins={[defaultLayoutPluginInstance]}
+            // plugins={[defaultLayoutPluginInstance]}
             fileUrl={pdfFile}
           ></Viewer>
         </Worker>

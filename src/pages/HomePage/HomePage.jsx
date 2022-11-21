@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './homePage.scss'
 import rightDown from '../images/rightDown.png'
 import right1 from '../images/right1.png'
@@ -11,40 +11,41 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useLottie } from 'lottie-react'
 import loadingLottie from '../../GNsign_loading.json'
+import { updateSuccess } from '../../redux/fileSlice'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 function HomePage() {
-  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
   const [openModel, setOpenModel] = useState(false)
   const [modelInfo, setModelInfo] = useState('')
-  const [files, setFiles] = useState([])
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      'image/*,.pdf': [],
-    },
-    onDrop: (acceptedFiles) => {
-      console.log('acceptedFiles', acceptedFiles)
 
-      if (acceptedFiles.length === 0) {
-        setModelInfo('檔案格式錯誤，請重新選擇')
-        setOpenModel(true)
-        return
-      }
-      if (acceptedFiles[0].size > 10485760) {
-        setModelInfo('檔案超過10MB，請重新選擇')
-        setOpenModel(true)
-        return
-      }
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      )
-    },
-  })
-  // const images = files.map((file) => {
-  //   return <img key={file.name} src={file.preview} alt="" />
-  // })
+  const onDrop = useCallback((acceptedFiles) => {
+    const selectedFile = acceptedFiles[0]
+
+    if (!selectedFile.type.includes('pdf')) {
+      setModelInfo('檔案格式錯誤，請重新選擇')
+      setOpenModel(true)
+      return
+    }
+    if (selectedFile.size > 10485760) {
+      setModelInfo('檔案超過10MB，請重新選擇')
+      setOpenModel(true)
+      return
+    }
+    const reader = new FileReader()
+    reader.readAsDataURL(selectedFile)
+    reader.onloadend = (e) => {
+      dispatch(updateSuccess(e.target.result))
+      // setTimeout(() => {
+      //   navigate('/page2')
+      // }, 5000)
+    }
+  }, [])
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
   const options = {
     animationData: loadingLottie,
     loop: true,
@@ -72,49 +73,50 @@ function HomePage() {
         </div>
       )}
 
-      <div className="container">
-        {loading ? (
-          <div className="loadingContainer">{View}</div>
-        ) : (
-          <>
-            <button>免費試用版</button>
-            <div className="title">小綠簽</div>
-            <div className="description">
-              護樹、永續、減碳的綠色生活
-              <br />
-              響應環保無紙化電子簽屬，
-              <br />
-              省時便利又環保。
+      {loading ? (
+        <div className="loadingContainer">
+          <div>{View}</div>
+          上傳中...
+        </div>
+      ) : (
+        <div className="container">
+          <button>免費試用版</button>
+          <div className="title">小綠簽</div>
+          <div className="description">
+            護樹、永續、減碳的綠色生活
+            <br />
+            響應環保無紙化電子簽屬，
+            <br />
+            省時便利又環保。
+          </div>
+          <div {...getRootProps()} className="fileContainer">
+            <div className="filImgContainer">
+              <img src={dragFileIcon} alt="" />
             </div>
-            <div {...getRootProps()} className="fileContainer">
-              <div className="filImgContainer">
-                <img src={dragFileIcon} alt="" />
-              </div>
 
-              <label htmlFor="">選擇檔案</label>
-              <input
-                {...getInputProps()}
-                // onChange={handleUploadFile}
-                type="file"
-                id="upload"
-                style={{ display: 'none' }}
-              />
-              <div className="remind">或拖移檔案到此處</div>
-              <div className="remind2">(限10MB內的PNG或JPG檔)</div>
+            <label htmlFor="">選擇檔案</label>
+            <input
+              {...getInputProps()}
+              // onChange={handleUploadFile}
+              type="file"
+              id="upload"
+              style={{ display: 'none' }}
+            />
+            <div className="remind">或拖移檔案到此處</div>
+            <div className="remind2">(限10MB內的PDF檔)</div>
+          </div>
+          <div className="imgContainer">
+            <div>
+              <img src={rightDown} alt="" className="rightDown" />
+              <img src={right1} alt="" className="right1" />
+              <img src={right2} alt="" className="right2" />
+              <img src={right3} alt="" className="right3" />
+              <img src={right5} alt="" className="right5" />
+              <img src={right4} alt="" className="right4" />
             </div>
-            <div className="imgContainer">
-              <div>
-                <img src={rightDown} alt="" className="rightDown" />
-                <img src={right1} alt="" className="right1" />
-                <img src={right2} alt="" className="right2" />
-                <img src={right3} alt="" className="right3" />
-                <img src={right5} alt="" className="right5" />
-                <img src={right4} alt="" className="right4" />
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

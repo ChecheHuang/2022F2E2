@@ -9,16 +9,14 @@ import right5 from '../images/right5.png'
 import dragFileIcon from '../images/dragFileIcon.png'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useLottie } from 'lottie-react'
-import loadingLottie from '../../GNsign_loading.json'
 import { updateSuccess } from '../../redux/fileSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import Loading from '../../components/Loading/Loading'
 function HomePage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [openModel, setOpenModel] = useState(false)
   const [modelInfo, setModelInfo] = useState('')
 
@@ -39,6 +37,7 @@ function HomePage() {
     reader.readAsDataURL(selectedFile)
     reader.onloadend = (e) => {
       dispatch(updateSuccess(e.target.result))
+      setLoading(true)
       // setTimeout(() => {
       //   navigate('/page2')
       // }, 5000)
@@ -46,11 +45,6 @@ function HomePage() {
   }, [])
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
-  const options = {
-    animationData: loadingLottie,
-    loop: true,
-  }
-  const { View } = useLottie(options)
   return (
     <div className="homePage">
       <div className="leftDownBg"></div>
@@ -75,7 +69,7 @@ function HomePage() {
 
       {loading ? (
         <div className="loadingContainer">
-          <div>{View}</div>
+          <Loading />
           上傳中...
         </div>
       ) : (

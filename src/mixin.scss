@@ -1,3 +1,6 @@
+$main: #1C8B6A;
+$btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
+
 @mixin ipad {
     @media (max-width:768px) {
         @content

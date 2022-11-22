@@ -1,0 +1,159 @@
+@import "../../mixin.scss";
+
+.page2 {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(228, 228, 228);
+
+    nav {
+        padding: 28px 40px 0px 40px;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+
+        @include ipad {
+            width: 100%;
+            height: 80px;
+
+            img {
+                display: none;
+
+            }
+        }
+
+        .buttonArea {
+            width: 228px;
+            height: 40px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            background: white;
+            border-radius: 14px;
+            @include iphone{
+                width: 240px;
+            }
+
+
+            button {
+                width: 50%;
+                height: 100%;
+                border-radius: 14px;
+                color: white;
+                background: $btn;
+                border: none;
+
+
+                &.active {
+                    color: #1C8B6A;
+                    background: white;
+                }
+            }
+        }
+    }
+
+
+    .circleContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin: 40px 0px 20px 0px;
+
+        div {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            position: relative;
+
+            &.active:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 120%;
+                height: 120%;
+                border-radius: 50%;
+                background: transparent;
+            }
+
+            &:first-child {
+                background: black;
+
+                &:before {
+                    border: 1px solid black;
+                }
+
+            }
+
+            &:nth-child(2) {
+                background: blue;
+
+                &:before {
+                    border: 1px solid blue;
+                }
+            }
+
+            &:nth-child(3) {
+                background: red;
+
+                &:before {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+
+    .sign {
+        width: 590px;
+        height: 224px;
+        background: #FFFFFF;
+        border-radius: 26px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: #B7B7B7;
+
+        @include iphone {
+            width: 343px;
+            height: 200px;
+            font-size: 18px;
+        }
+    }
+
+    .buttonArea2 {
+        width: 590px;
+        height: 56px;
+        display: flex;
+        gap: 19px;
+        margin: 12px auto;
+
+        @include iphone {
+            width: 343px;
+            height: 200px;
+        }
+
+        button {
+            width: 285px;
+            height: 56px;
+            border: 1px solid #1C8B6A;
+            border-radius: 16px;
+            background: #FFFFFF;
+            color: #1C8B6A;
+            @include iphone {
+                width: 165.5px;
+                height: 56px;
+            }
+
+            &:last-child {
+                background: $btn;
+                color: white;
+                border: none;
+            }
+        }
+
+    }
+}

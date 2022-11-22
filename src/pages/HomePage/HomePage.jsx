@@ -38,9 +38,9 @@ function HomePage() {
     reader.onloadend = (e) => {
       dispatch(updateSuccess(e.target.result))
       setLoading(true)
-      // setTimeout(() => {
-      //   navigate('/page2')
-      // }, 5000)
+      setTimeout(() => {
+        navigate('/page2')
+      }, 5000)
     }
   }, [])
   const { getRootProps, getInputProps } = useDropzone({ onDrop })

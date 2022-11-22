@@ -15,6 +15,12 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
         transform: translate(-50%, -50%);
         width: 300px;
         height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include ipad{
+            width: 132px;
+        }
     }
 
     .leftDownBg {
@@ -99,6 +105,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             padding: 26.05px 125px 21.38px 125px;
             position: fixed;
             z-index: 2;
+        }
+
+        @include iphone {
+            padding: 26.05px 38px 14.61px 38px;
+            align-items: flex-end;
 
         }
 
@@ -113,6 +124,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
             @include ipad {
                 width: 130.76px;
                 height: 87.57px;
+            }
+
+            @include iphone {
+                width: 88.61px;
+                height: 59.35px;
             }
         }
 
@@ -206,6 +222,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                 transform: translate(-50%, 0%);
             }
 
+            @include iphone {
+                width: 355px;
+                height: 400px;
+            }
+
             div {
                 width: 100%;
                 height: 100%;
@@ -229,6 +250,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         @include ipad {
                             width: 273px;
                         }
+
+                        @include iphone {
+                            bottom: 30px;
+                            width: 142px;
+                        }
                     }
 
                     &.right2 {
@@ -242,6 +268,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                             left: 38%;
                             width: 186px;
                         }
+
+                        @include iphone {
+                            bottom: 30px;
+                            width: 97px;
+                        }
                     }
 
                     &.right3 {
@@ -254,6 +285,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                         @include ipad {
                             width: 147px;
                         }
+
+                        @include iphone {
+                            bottom: 30px;
+                            width: 76px;
+                        }
                     }
 
                     &.right4 {
@@ -265,6 +301,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
 
                         @include ipad {
                             width: 206px;
+                        }
+
+                        @include iphone {
+                            bottom: 30px;
+                            width: 108px;
                         }
 
                     }
@@ -308,8 +349,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                 top: 135px;
                 left: 50%;
                 transform: translate(-50%, 0%);
+            }
 
-
+            @include iphone {
+                width: 299px;
+                height: 384px;
             }
 
             .filImgContainer {
@@ -319,6 +363,11 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                 @include ipad {
                     width: 225px;
                     height: 183px;
+                }
+
+                @include iphone {
+                    width: 134px;
+                    height: 110px;
                 }
 
                 img {
@@ -341,12 +390,22 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                 color: #FFFFFF;
                 font-weight: 400;
                 font-size: 18px;
+
+                @include iphone {
+                    width: 209px;
+                    height: 60px;
+                }
             }
 
             .remind {
                 font-size: 16px;
                 color: #424242;
                 margin-top: 15px;
+
+                @include ipad {
+                    display: none;
+                }
+
             }
 
             .remind2 {
@@ -356,6 +415,10 @@ $btn: linear-gradient(180deg, #35A483 0%, #077854 100%);
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
+
+                @include iphone {
+                    font-size: 14px;
+                }
             }
         }
 

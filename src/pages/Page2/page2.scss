@@ -5,6 +5,7 @@
     height: 100vh;
     background: rgb(228, 228, 228);
 
+
     .sigCanvas {
         border: 2px solid black;
     }
@@ -44,15 +45,16 @@
                 width: 50%;
                 height: 100%;
                 border-radius: 14px;
-                color: white;
-                background: $btn;
+                color: #1C8B6A;
+                background: white;
                 border: none;
                 text-align: center;
 
 
                 &.active {
-                    color: #1C8B6A;
-                    background: white;
+
+                    color: white;
+                    background: $btn;
                 }
             }
         }
@@ -163,5 +165,45 @@
             }
         }
 
+    }
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+
+    nav {
+        padding: 28px 40px 0px 40px;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+
+        @include ipad {
+            width: 100%;
+            height: 80px;
+
+            img {
+                display: none;
+
+            }
+        }
+    }
+
+
+    .loadingContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include ipad {
+            width: 132px;
+        }
     }
 }

@@ -5,36 +5,56 @@ import SignatureCanvas from 'react-signature-canvas'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateSign } from '../../redux/fileSlice'
-import { useEffect } from 'react'
+import Loading from '../../components/Loading/Loading'
+import { useNavigate } from 'react-router-dom'
 
 function Page2() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [color, setColor] = useState('black')
-  const sigCanvas = useRef({})
+  const [signState, setSignState] = useState('canvas')
+  const sigCanvas = useRef()
+
+  const [loading, setLoading] = useState(false)
 
   const pickColorButton = ['black', 'blue', 'red']
 
-  // useEffect(() => {
-  //   const context = sigCanvas.current.getContext('2d')
-  //   const image = new Image()
-  //   image.src =
-  //     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png'
-  //   image.onload = () => {
-  //     context.drawImage(image, 0, 0, 590, 224)
-  //   }
-  // }, [])
+  if (loading) {
+    return (
+      <div className="loading">
+        <nav>
+          <img src={logo} alt="" />
+        </nav>
+        <div className="loadingContainer">
+          <Loading />
+          簽名優化中....
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="page2">
       <nav>
         <img src={logo} alt="" />
         <div className="buttonArea">
-          <button>手寫簽名</button>
-          <button className="active">
-            <label htmlFor="fileInput">匯入簽名檔</label>
+          <button
+            onClick={() => {
+              setSignState('canvas')
+            }}
+            className={signState === 'canvas' ? 'active' : ''}
+          >
+            手寫簽名
           </button>
-          <input id="fileInput" type="file" />
+          <button
+            onClick={() => {
+              setSignState('image')
+            }}
+            className={signState === 'image' ? 'active' : ''}
+          >
+            匯入簽名檔
+          </button>
         </div>
       </nav>
       <div className="circleContainer">
@@ -51,13 +71,20 @@ function Page2() {
           )
         })}
       </div>
-      <SignatureCanvas
-        ref={sigCanvas}
-        penColor={color}
-        canvasProps={{ width: 590, height: 224, className: 'sign' }}
-      />
+      {signState === 'canvas' && (
+        <SignatureCanvas
+          ref={sigCanvas}
+          penColor={color}
+          canvasProps={{ width: 590, height: 224, className: 'sign' }}
+        />
+      )}
+      {signState === 'image' && (
+        <div className="sign">
+          <label htmlFor="imageFile">選擇檔案</label>
+          <input id="imageFile" type="file" />
+        </div>
+      )}
 
-      {/* <div>在此書寫你的簽名</div> */}
       <div className="buttonArea2">
         <button onClick={() => sigCanvas.current.clear()}>清除</button>
         <button
@@ -67,6 +94,10 @@ function Page2() {
                 sigCanvas.current.getTrimmedCanvas().toDataURL('image/png')
               )
             )
+            setLoading(true)
+            setTimeout(() => {
+              navigate('/page3')
+            }, 5000)
             console.log(sigCanvas.current.toDataURL('image/png', 1))
           }}
         >

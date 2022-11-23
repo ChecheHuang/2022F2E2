@@ -4,22 +4,16 @@ export const fileSlice = createSlice({
   name: 'file',
   initialState: {
     file: '',
-    pending: null,
-    error: false,
+    sign: '',
   },
   reducers: {
-    updateStart: (state) => {
-      state.pending = true
-    },
-    updateSuccess: (state, action) => {
-      state.pending = false
+    updateFile: (state, action) => {
       state.file = action.payload
     },
-    updateError: (state) => {
-      state.error = true
-      state.pending = false
+    updateSign: (state, action) => {
+      state.file = action.payload
     },
   },
 })
-export const { updateStart, updateSuccess, updateError } = fileSlice.actions
+export const { updateFile, updateSign } = fileSlice.actions
 export default fileSlice.reducer

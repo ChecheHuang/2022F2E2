@@ -5,6 +5,10 @@
     height: 100vh;
     background: rgb(228, 228, 228);
 
+    .sigCanvas {
+        border: 2px solid black;
+    }
+
     nav {
         padding: 28px 40px 0px 40px;
         display: flex;
@@ -30,7 +34,8 @@
             transform: translate(-50%, 0%);
             background: white;
             border-radius: 14px;
-            @include iphone{
+
+            @include iphone {
                 width: 240px;
             }
 
@@ -42,6 +47,7 @@
                 color: white;
                 background: $btn;
                 border: none;
+                text-align: center;
 
 
                 &.active {
@@ -117,6 +123,7 @@
         font-size: 22px;
         color: #B7B7B7;
 
+
         @include iphone {
             width: 343px;
             height: 200px;
@@ -143,6 +150,7 @@
             border-radius: 16px;
             background: #FFFFFF;
             color: #1C8B6A;
+
             @include iphone {
                 width: 165.5px;
                 height: 56px;

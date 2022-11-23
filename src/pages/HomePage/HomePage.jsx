@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import './homePage.scss'
 import rightDown from '../images/rightDown.png'
 import right1 from '../images/right1.png'
@@ -7,9 +7,8 @@ import right3 from '../images/right3.png'
 import right4 from '../images/right4.png'
 import right5 from '../images/right5.png'
 import dragFileIcon from '../images/dragFileIcon.png'
-import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { updateSuccess } from '../../redux/fileSlice'
+import { updateFile } from '../../redux/fileSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/Loading/Loading'
@@ -36,12 +35,13 @@ function HomePage() {
     const reader = new FileReader()
     reader.readAsDataURL(selectedFile)
     reader.onloadend = (e) => {
-      dispatch(updateSuccess(e.target.result))
+      dispatch(updateFile(e.target.result))
       setLoading(true)
       setTimeout(() => {
         navigate('/page2')
       }, 5000)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 

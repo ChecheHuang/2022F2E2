@@ -1,17 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
+
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
+import DragDrop from './DragDrop'
 
 function Sample2() {
-  const myCanvas = useRef()
-  useEffect(() => {
-    const context = myCanvas.current.getContext('2d')
-    const image = new Image()
-    image.src =
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png'
-    image.onload = () => {
-      context.drawImage(image, 0, 0, 300, 300)
-    }
-  }, [])
-  return <canvas ref={myCanvas} width={500} height={500} />
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div style={{ width: '100vw', height: '100vh', textAlign: 'center' }}>
+        <DragDrop />
+      </div>
+    </DndProvider>
+  )
 }
 
 export default Sample2

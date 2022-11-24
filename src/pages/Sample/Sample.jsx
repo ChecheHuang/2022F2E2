@@ -22,11 +22,11 @@ function Sample() {
 
   return (
     <div>
-      <input onChange={handleFile} type="file" />
+      <input onChange={handleFile} type="file" style={{ display: 'block' }} />
       {pdfFile && (
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
           <Viewer
-            // plugins={[defaultLayoutPluginInstance]}
+            plugins={[defaultLayoutPluginInstance]}
             fileUrl={pdfFile}
           ></Viewer>
         </Worker>

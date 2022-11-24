@@ -138,7 +138,7 @@ function Page2() {
             setLoading(true)
             setTimeout(() => {
               navigate('/page3')
-            }, 5000)
+            }, 1000)
           }}
         >
           建立簽名

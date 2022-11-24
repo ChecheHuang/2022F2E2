@@ -39,7 +39,7 @@ function HomePage() {
       setLoading(true)
       setTimeout(() => {
         navigate('/page2')
-      }, 5000)
+      }, 1000)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

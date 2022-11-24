@@ -12,6 +12,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
+          {/* <Route exact path="/sample" element={<Sample />} /> */}
           <Route exact path="/sample" element={<Sample />} />
           <Route exact path="/sample2" element={<Sample2 />} />
           <Route exact path="/page2" element={<Page2 />} />

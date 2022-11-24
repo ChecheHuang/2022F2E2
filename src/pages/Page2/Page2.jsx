@@ -7,18 +7,46 @@ import { useDispatch } from 'react-redux'
 import { updateSign } from '../../redux/fileSlice'
 import Loading from '../../components/Loading/Loading'
 import { useNavigate } from 'react-router-dom'
-
+import useRWD from '../../customhook/useRWD'
+import { useEffect } from 'react'
 function Page2() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const device = useRWD()
+  const [canvasSize, setConvasSize] = useState({ width: 590, height: 224 })
+  useEffect(() => {
+    switch (device) {
+      case 'PC':
+        setConvasSize({ width: 590, height: 224 })
+        break
+      case 'tablet':
+        setConvasSize({ width: 590, height: 224 })
+        break
+      case 'mobile':
+        setConvasSize({ width: 343, height: 200 })
+        break
+      default:
+    }
+  }, [device])
 
   const [color, setColor] = useState('black')
   const [signState, setSignState] = useState('canvas')
+  const [uploadImage, setUploadImage] = useState(null)
   const sigCanvas = useRef()
 
   const [loading, setLoading] = useState(false)
 
   const pickColorButton = ['black', 'blue', 'red']
+
+  const handleUploadFile = (e) => {
+    if (!e.target.files[0]) return
+    var reader = new FileReader()
+    reader.onload = function () {
+      setUploadImage(reader.result)
+    }
+    reader?.readAsDataURL(e?.target?.files[0])
+    e.target.value = ''
+  }
 
   if (loading) {
     return (
@@ -75,13 +103,21 @@ function Page2() {
         <SignatureCanvas
           ref={sigCanvas}
           penColor={color}
-          canvasProps={{ width: 590, height: 224, className: 'sign' }}
+          canvasProps={{ ...canvasSize, className: 'sign' }}
         />
       )}
       {signState === 'image' && (
         <div className="sign">
-          <label htmlFor="imageFile">選擇檔案</label>
-          <input id="imageFile" type="file" />
+          {uploadImage ? (
+            <div className="imgContainer">
+              <img src={uploadImage} alt="" />
+            </div>
+          ) : (
+            <>
+              <label htmlFor="imageFile">選擇檔案</label>
+              <input onChange={handleUploadFile} id="imageFile" type="file" />
+            </>
+          )}
         </div>
       )}
 
@@ -89,16 +125,20 @@ function Page2() {
         <button onClick={() => sigCanvas.current.clear()}>清除</button>
         <button
           onClick={() => {
-            dispatch(
-              updateSign(
-                sigCanvas.current.getTrimmedCanvas().toDataURL('image/png')
-              )
-            )
+            const uploadFile =
+              signState === 'canvas'
+                ? sigCanvas.current.getTrimmedCanvas().toDataURL('image/png')
+                : uploadImage
+            if (!uploadFile) {
+              alert('沒有上傳圖片')
+              return
+            }
+            dispatch(updateSign(uploadFile))
+
             setLoading(true)
             setTimeout(() => {
               navigate('/page3')
             }, 5000)
-            console.log(sigCanvas.current.toDataURL('image/png', 1))
           }}
         >
           建立簽名

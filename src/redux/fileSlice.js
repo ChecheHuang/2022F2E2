@@ -11,7 +11,7 @@ export const fileSlice = createSlice({
       state.file = action.payload
     },
     updateSign: (state, action) => {
-      state.file = action.payload
+      state.sign = action.payload
     },
   },
 })

@@ -20,6 +20,7 @@
     "eslint-plugin-react": "^7.31.10",
     "gh-pages": "^4.0.0",
     "lottie-react": "^2.3.1",
+    "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^3.0.279",
     "prettier": "^2.7.1",
     "pspdfkit": "^2022.5.1",

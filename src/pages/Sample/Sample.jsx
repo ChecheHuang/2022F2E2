@@ -20,7 +20,42 @@ import '@react-pdf-viewer/page-navigation/lib/styles/index.css'
 import { scrollModePlugin } from '@react-pdf-viewer/scroll-mode'
 
 import { getFilePlugin } from '@react-pdf-viewer/get-file'
+
+import { LayerRenderStatus } from '@react-pdf-viewer/core'
 function Sample() {
+  const message = 'customer@email.com'
+
+  const customCanvasPlugin = () => {
+    const onCanvasLayerRender = (e) => {
+      // Return if the canvas isn't rendered completely
+      if (e.status !== LayerRenderStatus.DidRender) {
+        return
+      }
+
+      // `e.ele` is the canvas element
+      const canvas = e.ele
+
+      const ctx = canvas.getContext('2d')
+      const centerX = canvas.width / 2
+      const centerY = canvas.height / 2
+
+      const fonts = ctx.font.split(' ')
+      const fontSize = parseInt(fonts[0], 10)
+
+      ctx.textAlign = 'center'
+      ctx.font = `${fontSize * e.scale * 4}px ${fonts[1]}`
+
+      ctx.fillStyle = '#CCC'
+      ctx.fillText(message, centerX, 200)
+    }
+
+    return {
+      onCanvasLayerRender,
+    }
+  }
+
+  const customCanvasPluginInstance = customCanvasPlugin()
+
   const getFilePluginInstance = getFilePlugin({
     fileNameGenerator: () => {
       return '完成簽署'
@@ -189,6 +224,7 @@ function Sample() {
                 scrollModePluginInstance,
                 pageNavigationPluginInstance,
                 getFilePluginInstance,
+                customCanvasPluginInstance,
               ]}
               fileUrl={pdfFile}
             ></Viewer>
